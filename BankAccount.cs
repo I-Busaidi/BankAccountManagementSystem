@@ -25,9 +25,17 @@ namespace BankAccountManagementSystem
             Balance = InitDepo;
         }
 
-        public void Deposit(double DepoAmount)
+        public void Deposit(double DepoAmount, string AccNumber)
         {
-
+            Bank bank = new Bank();
+            for (int i = 0; i < bank.BankAccounts.Count; i++)
+            {
+                if (bank.BankAccounts[i].AccountNumber.Trim() == AccNumber.Trim())
+                {
+                    bank.BankAccounts[i] = new BankAccount(bank.BankAccounts[i].AccountNumber, bank.BankAccounts[i].AccountHolderName, bank.BankAccounts[i].Balance + DepoAmount);
+                    Console.WriteLine($"\n${DepoAmount} has been successfully deposited to your account.\nNew balance is ${bank.BankAccounts[i].Balance}\n");
+                }
+            }
         }
 
         public void Withdraw(double DrawAmount, string AccNumber)
@@ -39,21 +47,30 @@ namespace BankAccountManagementSystem
                 {
                     if (bank.BankAccounts[i].Balance >= DrawAmount)
                     {
-                        
+                        bank.BankAccounts[i] = new BankAccount(bank.BankAccounts[i].AccountNumber, bank.BankAccounts[i].AccountHolderName, bank.BankAccounts[i].Balance - DrawAmount);
+                        Console.WriteLine($"\n${DrawAmount} has been successfully withdrawn from you account.\nNew balance is ${bank.BankAccounts[i].Balance}\n");
                     }
                     else
                     {
-                        Console.WriteLine("\nInsufficient balance.");
+                        Console.WriteLine("\nInsufficient balance.\n");
                     }
                     break;
                 }
             }
         }
 
-        public string GetAccountInfo()
+        public string GetAccountInfo(string AccNumber)
         {
             StringBuilder sb = new StringBuilder();
-
+            Bank bank = new Bank();
+            for (int i = 0; i < bank.BankAccounts.Count; i++)
+            {
+                if (bank.BankAccounts[i].AccountNumber.Trim() == AccNumber.Trim())
+                {
+                    Console.WriteLine($"Account Number: {bank.BankAccounts[i].AccountNumber}\nAccount Holder Name: {bank.BankAccounts[i].AccountHolderName}\nAccount Balance: ${bank.BankAccounts[i].Balance}");
+                    break;
+                }
+            }
             return sb.ToString();
         }
 

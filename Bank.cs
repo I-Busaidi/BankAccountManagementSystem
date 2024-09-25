@@ -48,7 +48,8 @@ namespace BankAccountManagementSystem
             for (int i = 0; i < BankAccounts.Count; i++)
             {
                 BankAccount acc = BankAccounts[i];
-                if (acc.GetAccountNumber().Trim() == AccNumber.Trim() || acc.GetAccountHolderName().ToLower().Trim() == AccHolderName.ToLower().Trim())
+                if (acc.GetAccountNumber().Trim() == AccNumber.Trim() 
+                    || acc.GetAccountHolderName().ToLower().Trim() == AccHolderName.ToLower().Trim())
                 {
                     AccExists = true;
                     break;

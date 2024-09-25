@@ -10,7 +10,7 @@ namespace BankAccountManagementSystem
     {
         private string AccountNumber;
         private string AccountHolderName;
-        private double Balance;
+        public double Balance { get; private set; }
 
         public BankAccount(string AccNumber, string AccHolderName)
         {
@@ -30,9 +30,24 @@ namespace BankAccountManagementSystem
 
         }
 
-        public void Withdraw(double DrawAmount)
+        public void Withdraw(double DrawAmount, string AccNumber)
         {
-
+            Bank bank = new Bank();
+            for (int i = 0; i < bank.BankAccounts.Count; i++)
+            {
+                if (bank.BankAccounts[i].AccountNumber.Trim() == AccNumber.Trim())
+                {
+                    if (bank.BankAccounts[i].Balance >= DrawAmount)
+                    {
+                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("\nInsufficient balance.");
+                    }
+                    break;
+                }
+            }
         }
 
         public string GetAccountInfo()

@@ -10,15 +10,19 @@ namespace BankAccountManagementSystem
     {
         private string AccountNumber;
         private string AccountHolderName;
-        public double Balance { get; private set; }
+        private double Balance;
 
         public BankAccount(string AccNumber, string AccHolderName)
         {
-            
+            AccountNumber = AccNumber;
+            AccountHolderName = AccHolderName;
+            Balance = 0;
         }
-        public BankAccount(string AccNumber, string AccHolderName, decimal InitDepo) 
+        public BankAccount(string AccNumber, string AccHolderName, double InitDepo) 
         {
-            
+            AccountNumber=AccNumber;
+            AccountHolderName = AccHolderName;
+            Balance = InitDepo;
         }
 
         public void Deposit(double DepoAmount)
@@ -31,11 +35,24 @@ namespace BankAccountManagementSystem
 
         }
 
-        public string GetAccountNumber()
+        public string GetAccountInfo()
         {
             StringBuilder sb = new StringBuilder();
 
             return sb.ToString();
+        }
+
+        public double GetBalance()
+        {
+            return Balance;
+        }
+        public string GetAccountHolderName()
+        {
+            return AccountHolderName;
+        }
+        public string GetAccountNumber()
+        {
+            return AccountNumber;
         }
     }
 }

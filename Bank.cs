@@ -8,35 +8,21 @@ namespace BankAccountManagementSystem
 {
     public class Bank
     {
-        private List<(string AccNumber, string AccHolderName, double Balance)> BankAccounts = new List<(string AccNumber, string AccHolderName, double Balance)>();
+        public List<BankAccount> BankAccounts = new List<BankAccount>();
 
-        public bool CheckExistingAcc(string AccNumber, string AccHolderName)
+        public void AddNewAccount(BankAccount UserInfo)
         {
-            bool AccExists = false;
-            for (int i = 0; i < BankAccounts.Count; i++)
-            {
-                if ((BankAccounts[i].AccNumber.Trim() == AccNumber.Trim()) || (BankAccounts[i].AccHolderName.Trim().ToLower() == AccHolderName.Trim().ToLower()))
-                {
-                    AccExists = true;
-                }
-            }
-            return AccExists;
-        }
-
-        public void AddNewAccount(string AccNumber, string AccHolderName, double Balance)
-        {
-            BankAccounts.Add((AccNumber, AccHolderName, Balance));
+            BankAccounts.Add(UserInfo);
         }
 
         public void GetAccByNumber(string AccNumber)
         {
-            for (int i = 0;i < BankAccounts.Count;i++)
+            for (int i = 0; i < BankAccounts.Count; i++)
             {
-                if (BankAccounts[i].AccNumber.Trim() == AccNumber.Trim())
+                BankAccount acc = BankAccounts[i];
+                if (acc.GetAccountNumber().Trim() == AccNumber.Trim())
                 {
-                    Console.WriteLine($"Bank Account Number: {BankAccounts[i].AccNumber}\n" +
-                        $"Bank Account Holder Name: {BankAccounts[i].AccHolderName}.\n" +
-                        $"Bank Account Balance: ${BankAccounts[i].Balance}\n");
+                    Console.WriteLine($"Account Number: {acc.GetAccountNumber()}\nAccount Holder Name: {acc.GetAccountHolderName}\nAccount Balance: ${acc.GetBalance}");
                     break;
                 }
             }
@@ -45,44 +31,30 @@ namespace BankAccountManagementSystem
         public void DisplayAllAccounts()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"{"Account Number", -30} | {"Account Holder Name", -30} | {"Balance", -30}");
             string border = new string('-', 100);
-            sb.AppendLine($"{"Account Number", 30} | {"Account Holder Name", 30} | {"Balance", 30}");
-            for (int i = 0; i < BankAccounts.Count ; i++)
-            {
-                sb.AppendLine($"{"",30} | {"",30} | {"",30}");
-                sb.AppendLine($"{BankAccounts[i].AccNumber,30} | {BankAccounts[i].AccHolderName,30} | {BankAccounts[i].Balance,30}");
-            }
-            Console.WriteLine( sb.ToString() );
-            sb.Clear();
-        }
-
-        public bool CheckWithdrawPossible(string AccNumber, double WithdrawAmount)
-        {
-            bool CanWithdraw = false;
+            sb.AppendLine(border);
             for (int i = 0; i < BankAccounts.Count; i++)
             {
-                if (BankAccounts[i].AccNumber == AccNumber)
-                {
-                    if (BankAccounts[i].Balance >= WithdrawAmount)
-                    {
-                        CanWithdraw = true;
-                    }
-                    break;
-                }
+                BankAccount acc = BankAccounts[i];
+                sb.AppendLine($"{"",-30} | {"",-30} | {"",-30}");
+                sb.AppendLine($"{acc.GetAccountNumber(),-30} | {acc.GetAccountHolderName(),-30} | {acc.GetBalance(),-30}");
             }
-            return CanWithdraw;
+            Console.WriteLine( sb.ToString() );
         }
-
-        public void ChangeBalance(string AccNumber, double BalanceChange)
+        public bool CheckAccountExist(string AccNumber, string AccHolderName)
         {
-            for (int i = 0;i < BankAccounts.Count;i++)
+            bool AccExists = false;
+            for (int i = 0; i < BankAccounts.Count; i++)
             {
-                if (BankAccounts[i].AccNumber.Trim() == AccNumber.Trim())
+                BankAccount acc = BankAccounts[i];
+                if (acc.GetAccountNumber().Trim() == AccNumber.Trim() || acc.GetAccountHolderName().ToLower().Trim() == AccHolderName.ToLower().Trim())
                 {
-                    BankAccounts[i] = (BankAccounts[i].AccNumber, BankAccounts[i].AccHolderName, (BankAccounts[i].Balance + BalanceChange));
+                    AccExists = true;
                     break;
                 }
             }
+            return AccExists;
         }
     }
 }

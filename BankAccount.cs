@@ -14,7 +14,7 @@ namespace BankAccountManagementSystem
 
         public BankAccount(string AccNumber, string AccHolderName)
         {
-
+            
         }
         public BankAccount(string AccNumber, string AccHolderName, decimal InitDepo) 
         {

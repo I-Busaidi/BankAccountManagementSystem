@@ -55,5 +55,34 @@ namespace BankAccountManagementSystem
             Console.WriteLine( sb.ToString() );
             sb.Clear();
         }
+
+        public bool CheckWithdrawPossible(string AccNumber, double WithdrawAmount)
+        {
+            bool CanWithdraw = false;
+            for (int i = 0; i < BankAccounts.Count; i++)
+            {
+                if (BankAccounts[i].AccNumber == AccNumber)
+                {
+                    if (BankAccounts[i].Balance >= WithdrawAmount)
+                    {
+                        CanWithdraw = true;
+                    }
+                    break;
+                }
+            }
+            return CanWithdraw;
+        }
+
+        public void ChangeBalance(string AccNumber, double BalanceChange)
+        {
+            for (int i = 0;i < BankAccounts.Count;i++)
+            {
+                if (BankAccounts[i].AccNumber.Trim() == AccNumber.Trim())
+                {
+                    BankAccounts[i] = (BankAccounts[i].AccNumber, BankAccounts[i].AccHolderName, (BankAccounts[i].Balance + BalanceChange));
+                    break;
+                }
+            }
+        }
     }
 }

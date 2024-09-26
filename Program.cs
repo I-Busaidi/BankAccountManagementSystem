@@ -83,19 +83,21 @@ namespace BankAccountManagementSystem
             int InitDepoChoice;
 
             Console.WriteLine("\nEnter account number: \n");
-            while (string.IsNullOrEmpty(AccNumber = Console.ReadLine()) || !double.TryParse(AccNumber, out _))
+            while (string.IsNullOrEmpty(AccNumber = Console.ReadLine()) || !ValidateAccountInfo(AccNumber, 1).Item1 || !double.TryParse(AccNumber, out _))
             {
                 Console.Clear();
                 Console.WriteLine("\nEnter account number: \n");
+                Console.WriteLine(ValidateAccountInfo(AccNumber, 1).Item2);
                 Console.WriteLine("\nInvalid input, please try again:\n");
             }
 
             Console.Clear();
             Console.WriteLine("\nEnter account holder name: \n");
-            while (string.IsNullOrEmpty(AccHolderName = Console.ReadLine()) || double.TryParse(AccHolderName, out _))
+            while (string.IsNullOrEmpty(AccHolderName = Console.ReadLine()) || !ValidateAccountInfo(AccHolderName, 2).Item1 || double.TryParse(AccHolderName, out _))
             {
                 Console.Clear();
                 Console.WriteLine("\nEnter account holder name: \n");
+                Console.WriteLine(ValidateAccountInfo(AccHolderName, 2).Item2);
                 Console.WriteLine("\nInvalid input, please try again:\n");
             }
 
@@ -239,6 +241,45 @@ namespace BankAccountManagementSystem
                 sb.AppendLine($"{account.GetAccountNumber(),-30} | {account.GetAccountHolderName(),-30} | ${account.GetBalance(),-30}");
             }
             Console.WriteLine(sb.ToString());
+        }
+
+        static (bool, string?) ValidateAccountInfo(string Input, int opt = 1)
+        {
+            bool AccNumFound = false;
+            bool AccNameFound = false;
+            string? Message = null;
+
+            var Accounts = bank.DisplayAllAccounts();
+
+            foreach (var account in Accounts)
+            {
+                if (account.GetAccountNumber().Trim() == Input.Trim())
+                {
+                    AccNumFound = true;
+                    break;
+                }
+                if (account.GetAccountHolderName().Trim() == Input.Trim())
+                {
+                    AccNameFound = true;
+                    break;
+                }
+            }
+            if (opt == 1)
+            {
+                if (AccNumFound)
+                {
+                    Message = "\nAccount number already exists.";
+                }
+                return (AccNameFound, Message);
+            }
+            else
+            {
+                if (AccNameFound)
+                {
+                    Message = "\nAccount holder name already exists.";
+                }
+                return (AccNumFound, Message);
+            }
         }
     }
 }

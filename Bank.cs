@@ -14,25 +14,11 @@ namespace BankAccountManagementSystem
             BankAccounts.Add(new BankAccount("444", "mmm", 0));
             BankAccounts.Add(new BankAccount("555", "ccc", 0));
             BankAccounts.Add(new BankAccount("999", "ddd", 8));
-            BankAccounts.Add(new BankAccount("999", "ddd", 10));
         }
         public void AddNewAccount(BankAccount UserInfo)
         {
             BankAccounts.Add(UserInfo);
         }
-
-        //public void GetAccByNumber(string AccNumber)
-        //{
-        //    for (int i = 0; i < BankAccounts.Count; i++)
-        //    {
-        //        BankAccount acc = BankAccounts[i];
-        //        if (acc.GetAccountNumber().Trim() == AccNumber.Trim())
-        //        {
-        //            Console.WriteLine($"Account Number: {acc.GetAccountNumber()}\nAccount Holder Name: {acc.GetAccountHolderName}\nAccount Balance: ${acc.GetBalance}");
-        //            break;
-        //        }
-        //    }
-        //}
 
         public List<BankAccount> DisplayAllAccounts()
         {

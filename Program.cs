@@ -258,7 +258,7 @@ namespace BankAccountManagementSystem
                     AccNumFound = true;
                     break;
                 }
-                if (account.GetAccountHolderName().Trim() == Input.Trim())
+                if (account.GetAccountHolderName().Trim().ToLower() == Input.Trim().ToLower())
                 {
                     AccNameFound = true;
                     break;

@@ -19,7 +19,6 @@ namespace BankAccountManagementSystem
         {
             BankAccounts.Add(UserInfo);
         }
-
         public List<BankAccount> DisplayAllAccounts()
         {
             

@@ -83,7 +83,7 @@ namespace BankAccountManagementSystem
             int InitDepoChoice;
 
             Console.WriteLine("\nEnter account number: \n");
-            while (string.IsNullOrEmpty(AccNumber = Console.ReadLine()) || !ValidateAccountInfo(AccNumber, 1).Item1 || !double.TryParse(AccNumber, out _))
+            while (string.IsNullOrEmpty(AccNumber = Console.ReadLine()) || ValidateAccountInfo(AccNumber, 1).Item1 || !double.TryParse(AccNumber, out _))
             {
                 Console.Clear();
                 Console.WriteLine("\nEnter account number: \n");
@@ -93,7 +93,7 @@ namespace BankAccountManagementSystem
 
             Console.Clear();
             Console.WriteLine("\nEnter account holder name: \n");
-            while (string.IsNullOrEmpty(AccHolderName = Console.ReadLine()) || !ValidateAccountInfo(AccHolderName, 2).Item1 || double.TryParse(AccHolderName, out _))
+            while (string.IsNullOrEmpty(AccHolderName = Console.ReadLine()) || ValidateAccountInfo(AccHolderName, 2).Item1 || double.TryParse(AccHolderName, out _))
             {
                 Console.Clear();
                 Console.WriteLine("\nEnter account holder name: \n");
@@ -270,7 +270,7 @@ namespace BankAccountManagementSystem
                 {
                     Message = "\nAccount number already exists.";
                 }
-                return (AccNameFound, Message);
+                return (AccNumFound, Message);
             }
             else
             {
@@ -278,7 +278,7 @@ namespace BankAccountManagementSystem
                 {
                     Message = "\nAccount holder name already exists.";
                 }
-                return (AccNumFound, Message);
+                return (AccNameFound, Message);
             }
         }
     }

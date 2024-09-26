@@ -11,9 +11,9 @@ namespace BankAccountManagementSystem
         public static List<BankAccount> BankAccounts = new List<BankAccount>();
         static Bank()
         {
-            BankAccounts.Add(new BankAccount("444", "mmm", 0));
-            BankAccounts.Add(new BankAccount("555", "ccc", 0));
-            BankAccounts.Add(new BankAccount("999", "ddd", 8));
+            BankAccounts.Add(new BankAccount("11112222", "mmm", 0));
+            BankAccounts.Add(new BankAccount("55555555", "ccc", 0));
+            BankAccounts.Add(new BankAccount("99999999", "ddd", 8));
         }
         public void AddNewAccount(BankAccount UserInfo)
         {

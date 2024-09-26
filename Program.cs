@@ -3,11 +3,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BankAccountManagementSystem
 {
     internal class Program
     {
+        static string AccountNumberPattern = @"^\d{8,12}$";
+        static string NamePattern = @"^[A-Za-z]+(?: [A-Za-z]+)*$";
+
         private static Bank bank = new Bank();
 
         static void Main(string[] args)
@@ -82,18 +86,24 @@ namespace BankAccountManagementSystem
             double InitDepo = 0;
             int InitDepoChoice;
 
-            Console.WriteLine("\nEnter account number: \n");
-            while (string.IsNullOrEmpty(AccNumber = Console.ReadLine()) || ValidateAccountInfo(AccNumber, 1).Item1 || !double.TryParse(AccNumber, out _))
+            Console.WriteLine("\nEnter account number (8 to 12 numbers): \n");
+            while (string.IsNullOrEmpty(AccNumber = Console.ReadLine()) 
+                || ValidateAccountInfo(AccNumber, 1).Item1 
+                || !double.TryParse(AccNumber, out _)
+                || !Regex.IsMatch(AccNumber, AccountNumberPattern))
             {
                 Console.Clear();
-                Console.WriteLine("\nEnter account number: \n");
+                Console.WriteLine("\nEnter account number (8 to 12 numbers): \n");
                 Console.WriteLine(ValidateAccountInfo(AccNumber, 1).Item2);
                 Console.WriteLine("\nInvalid input, please try again:\n");
             }
 
             Console.Clear();
             Console.WriteLine("\nEnter account holder name: \n");
-            while (string.IsNullOrEmpty(AccHolderName = Console.ReadLine()) || ValidateAccountInfo(AccHolderName, 2).Item1 || double.TryParse(AccHolderName, out _))
+            while (string.IsNullOrEmpty(AccHolderName = Console.ReadLine()) 
+                || ValidateAccountInfo(AccHolderName, 2).Item1 
+                || double.TryParse(AccHolderName, out _)
+                || !Regex.IsMatch(AccHolderName, NamePattern))
             {
                 Console.Clear();
                 Console.WriteLine("\nEnter account holder name: \n");

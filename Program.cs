@@ -150,12 +150,19 @@ namespace BankAccountManagementSystem
                 Console.WriteLine("\nInvalid input, please try again: \n");
             }
 
-            var account = bank.DisplayAllAccounts().FirstOrDefault(a => a.GetAccountNumber().Trim() == AccNumber.Trim());
-            if (account != null)
+            var Accounts = bank.DisplayAllAccounts();
+            bool AccFound = false;
+            foreach (var account in Accounts)
             {
-                account.Deposit(DepoAmount);
+                if (account.GetAccountNumber().Trim() == AccNumber.Trim())
+                {
+                    account.Deposit(DepoAmount);
+                    AccFound = true;
+                    break;
+                }
             }
-            else
+
+            if (!AccFound)
             {
                 Console.WriteLine("Account not found.");
             }
@@ -178,12 +185,19 @@ namespace BankAccountManagementSystem
                 Console.WriteLine("\nInvalid input, please try again: \n");
             }
 
-            var account = bank.DisplayAllAccounts().FirstOrDefault(a => a.GetAccountNumber().Trim() == AccNumber.Trim());
-            if (account != null)
+            var Accounts = bank.DisplayAllAccounts();
+            bool AccFound = false;
+            foreach (var account in Accounts)
             {
-                account.Withdraw(DrawAmount);
+                if (account.GetAccountNumber().Trim() == AccNumber.Trim())
+                {
+                    account.Withdraw(DrawAmount);
+                    AccFound = true;
+                    break;
+                }
             }
-            else
+
+            if (!AccFound)
             {
                 Console.WriteLine("Account not found.");
             }
@@ -193,14 +207,20 @@ namespace BankAccountManagementSystem
         {
             Console.WriteLine("\nEnter your account number: \n");
             string AccNumber = Console.ReadLine();
+            bool AccFound = false;
+            var Accounts = bank.DisplayAllAccounts();
 
-            var account = bank.DisplayAllAccounts().FirstOrDefault(a => a.GetAccountNumber().Trim() == AccNumber.Trim());
-
-            if (account != null)
+            foreach ( var account in Accounts )
             {
-                Console.WriteLine(account.GetAccountInfo());
+                if (account.GetAccountNumber().Trim() == AccNumber.Trim())
+                {
+                    Console.WriteLine(account.GetAccountInfo());
+                    AccFound = true;
+                    break;
+                }
             }
-            else
+
+            if (!AccFound)
             {
                 Console.WriteLine("Account not found.");
             }

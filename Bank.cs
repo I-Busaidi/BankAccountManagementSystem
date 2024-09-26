@@ -8,8 +8,14 @@ namespace BankAccountManagementSystem
 {
     public class Bank
     {
-        public List<BankAccount> BankAccounts = new List<BankAccount>();
-
+        public static List<BankAccount> BankAccounts = new List<BankAccount>();
+        static Bank()
+        {
+            BankAccounts.Add(new BankAccount("444", "mmm", 0));
+            BankAccounts.Add(new BankAccount("555", "ccc", 0));
+            BankAccounts.Add(new BankAccount("999", "ddd", 8));
+            BankAccounts.Add(new BankAccount("999", "ddd", 10));
+        }
         public void AddNewAccount(BankAccount UserInfo)
         {
             BankAccounts.Add(UserInfo);

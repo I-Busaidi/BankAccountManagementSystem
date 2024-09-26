@@ -15,32 +15,23 @@ namespace BankAccountManagementSystem
             BankAccounts.Add(UserInfo);
         }
 
-        public void GetAccByNumber(string AccNumber)
-        {
-            for (int i = 0; i < BankAccounts.Count; i++)
-            {
-                BankAccount acc = BankAccounts[i];
-                if (acc.GetAccountNumber().Trim() == AccNumber.Trim())
-                {
-                    Console.WriteLine($"Account Number: {acc.GetAccountNumber()}\nAccount Holder Name: {acc.GetAccountHolderName}\nAccount Balance: ${acc.GetBalance}");
-                    break;
-                }
-            }
-        }
+        //public void GetAccByNumber(string AccNumber)
+        //{
+        //    for (int i = 0; i < BankAccounts.Count; i++)
+        //    {
+        //        BankAccount acc = BankAccounts[i];
+        //        if (acc.GetAccountNumber().Trim() == AccNumber.Trim())
+        //        {
+        //            Console.WriteLine($"Account Number: {acc.GetAccountNumber()}\nAccount Holder Name: {acc.GetAccountHolderName}\nAccount Balance: ${acc.GetBalance}");
+        //            break;
+        //        }
+        //    }
+        //}
 
-        public void DisplayAllAccounts()
+        public List<BankAccount> DisplayAllAccounts()
         {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"{"Account Number", -30} | {"Account Holder Name", -30} | {"Balance", -30}");
-            string border = new string('-', 100);
-            sb.AppendLine(border);
-            for (int i = 0; i < BankAccounts.Count; i++)
-            {
-                BankAccount acc = BankAccounts[i];
-                sb.AppendLine($"{"",-30} | {"",-30} | {"",-30}");
-                sb.AppendLine($"{acc.GetAccountNumber(),-30} | {acc.GetAccountHolderName(),-30} | {acc.GetBalance(),-30}");
-            }
-            Console.WriteLine( sb.ToString() );
+            
+            return new List<BankAccount> (BankAccounts);
         }
         public bool CheckAccountExist(string AccNumber, string AccHolderName)
         {
